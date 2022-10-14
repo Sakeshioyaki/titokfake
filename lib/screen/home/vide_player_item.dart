@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_fake/common/app_colors.dart';
-import 'package:tiktok_fake/screen/home/widget/header_home_page.dart';
 import 'package:tiktok_fake/screen/home/widget/left_panel.dart';
 import 'package:tiktok_fake/screen/home/widget/right_panel.dart';
 import 'package:video_player/video_player.dart';
@@ -15,6 +14,8 @@ class VideoPlayerItem extends StatefulWidget {
   final String? comments;
   final String? shares;
   final String? albumImg;
+  final String? bookMark;
+
   VideoPlayerItem({
     Key? key,
     required this.size,
@@ -27,6 +28,7 @@ class VideoPlayerItem extends StatefulWidget {
     this.shares,
     this.albumImg,
     this.videoUrl,
+    this.bookMark,
   }) : super(key: key);
 
   final Size size;
@@ -113,7 +115,6 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const HeaderHomePage(),
                           Expanded(
                               child: Row(
                             children: <Widget>[
@@ -130,6 +131,7 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
                                 shares: "${widget.shares}",
                                 profileImg: "${widget.profileImg}",
                                 albumImg: "${widget.albumImg}",
+                                bookMark: "${widget.bookMark}",
                               )
                             ],
                           ))

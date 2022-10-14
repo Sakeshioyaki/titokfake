@@ -10,5 +10,9 @@ class AppImages {
   static const String icHeart = 'assets/icons/heart _icon.png';
   static const String icShare = 'assets/icons/share_icon.png';
   static const String icMessageHome = 'assets/icons/message_icon_home.png';
+  static const String icClose = 'assets/icons/close_icon.png';
   static const String imgDisc = 'assets/imgs/disc.png';
+  static const String icDiscover = 'assets/icons/discover.png';
+  static const String icLiveIcon = 'assets/icons/live_icon.png';
+  static const String icBookMark = 'assets/icons/bookmark.png';
 }

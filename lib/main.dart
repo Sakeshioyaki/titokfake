@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               const SizedBox(height: 5),
               Text(
-                'Home',
+                'Trang chủ',
                 style: AppTextStyle.textWhiterS10Bold,
               ),
             ],
@@ -82,12 +82,12 @@ class _MyHomePageState extends State<MyHomePage> {
           icon: Column(
             children: [
               Image.asset(
-                AppImages.icSearch,
+                AppImages.icDiscover,
                 width: 21,
               ),
               const SizedBox(height: 5),
               Text(
-                'Search',
+                'Khám phá',
                 style: AppTextStyle.textWhiterS10Bold,
               ),
             ],
@@ -115,7 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               const SizedBox(height: 5),
               Text(
-                'Inbox',
+                'Hộp thư',
                 style: AppTextStyle.textWhiterS10Bold,
               ),
             ],
@@ -132,7 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               const SizedBox(height: 5),
               Text(
-                'Me',
+                'Hồ sơ',
                 style: AppTextStyle.textWhiterS10Bold,
               ),
             ],
@@ -145,6 +145,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawerEnableOpenDragGesture: false,
       body: PersistentTabView(
         context,
         controller: _controller,

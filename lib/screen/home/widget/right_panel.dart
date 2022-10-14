@@ -8,6 +8,7 @@ class RightPanel extends StatelessWidget {
   final String? shares;
   final String? profileImg;
   final String? albumImg;
+  final String? bookMark;
   const RightPanel({
     Key? key,
     required this.size,
@@ -16,6 +17,7 @@ class RightPanel extends StatelessWidget {
     this.shares,
     this.profileImg,
     this.albumImg,
+    this.bookMark,
   }) : super(key: key);
 
   final Size size;
@@ -26,25 +28,75 @@ class RightPanel extends StatelessWidget {
       child: Container(
         height: size.height,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-            Container(
-              height: size.height * 0.3,
-            ),
-            Expanded(
-                child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+            buildProfile(),
+            const SizedBox(height: 34),
+            buildLikes(),
+            const SizedBox(height: 23),
+            GestureDetector(
+                onTap: () {
+                  showModalBottomSheet(
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(8.0),
+                      ),
+                    ),
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 12,
+                        ),
+                        height: size.height * 0.75,
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const SizedBox(width: 10),
+                                Text(
+                                  "${comments!} bình luận",
+                                  style: AppTextStyle.textBlackS13Bold,
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Image.asset(
+                                    AppImages.icClose,
+                                    width: 13,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    useRootNavigator: true,
+                  );
+                },
+                child: buildComments()),
+            const SizedBox(height: 23),
+            Column(
               children: [
-                buildProfile(),
-                const SizedBox(height: 34),
-                buildLikes(),
-                const SizedBox(height: 23),
-                buildComments(),
-                const SizedBox(height: 23),
-                buildShare(),
-                const SizedBox(height: 30),
-                buildMusicAlbum()
+                Image.asset(
+                  AppImages.icBookMark,
+                  width: 34,
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  bookMark!,
+                  style: AppTextStyle.textWhiteS13,
+                ),
               ],
-            ))
+            ),
+            const SizedBox(height: 23),
+            buildShare(),
+            const SizedBox(height: 30),
+            buildMusicAlbum()
           ],
         ),
       ),

@@ -7,6 +7,10 @@ class AppTextStyle {
     color: AppColors.whiteAuth,
     fontFamily: AppConst.fontPoppins,
   );
+  static const textBlack = TextStyle(
+    color: AppColors.blackAuth,
+    fontFamily: AppConst.fontPoppins,
+  );
 
   static final textWhiteS10 = textWhite.copyWith(
     fontSize: 10,
@@ -22,6 +26,14 @@ class AppTextStyle {
 
   static final textWhiterS13Bold = textWhite.copyWith(
     fontSize: 13,
+    fontWeight: FontWeight.bold,
+  );
+  static final textBlackS13Bold = textBlack.copyWith(
+    fontSize: 13,
+    fontWeight: FontWeight.bold,
+  );
+  static final textWhiterS16Bold = textWhite.copyWith(
+    fontSize: 16,
     fontWeight: FontWeight.bold,
   );
 }
