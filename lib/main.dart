@@ -3,6 +3,7 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:tiktok_fake/common/app_images.dart';
 import 'package:tiktok_fake/common/app_text_styles.dart';
 import 'package:tiktok_fake/screen/home/home_page.dart';
+import 'package:tiktok_fake/screen/profile/profile_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -46,9 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<Widget> _buildScreens() => [
         const HomePage(),
-        const Center(
-          child: Text('screen new'),
-        ),
+        const ProfilePage(),
         const Center(
           child: Text('screen new'),
         ),

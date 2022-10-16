@@ -15,4 +15,7 @@ class AppImages {
   static const String icDiscover = 'assets/icons/discover.png';
   static const String icLiveIcon = 'assets/icons/live_icon.png';
   static const String icBookMark = 'assets/icons/bookmark.png';
+  static const String icNotification = 'assets/icons/noti_icon.png';
+  static const String icShowMore = 'assets/icons/more_icon.png';
+  static const String icBack = 'assets/icons/back_icon.png';
 }

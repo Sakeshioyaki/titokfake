@@ -101,42 +101,52 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
                           decoration: const BoxDecoration(),
                           child: isPlaying(),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
                 SizedBox(
                   height: widget.size.height,
                   width: widget.size.width,
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.only(left: 15, top: 20, bottom: 10),
-                    child: SafeArea(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                              child: Row(
-                            children: <Widget>[
-                              LeftPanel(
+                  child: SafeArea(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                            child: Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.only(left: 10),
+                              child: LeftPanel(
                                 size: widget.size,
                                 name: "${widget.name}",
                                 caption: "${widget.caption}",
                                 songName: "${widget.songName}",
                               ),
-                              RightPanel(
-                                size: widget.size,
-                                likes: "${widget.likes}",
-                                comments: "${widget.comments}",
-                                shares: "${widget.shares}",
-                                profileImg: "${widget.profileImg}",
-                                albumImg: "${widget.albumImg}",
-                                bookMark: "${widget.bookMark}",
-                              )
-                            ],
-                          ))
-                        ],
-                      ),
+                            ),
+                            RightPanel(
+                              size: widget.size,
+                              likes: "${widget.likes}",
+                              comments: "${widget.comments}",
+                              shares: "${widget.shares}",
+                              profileImg: "${widget.profileImg}",
+                              albumImg: "${widget.albumImg}",
+                              bookMark: "${widget.bookMark}",
+                            ),
+                          ],
+                        )),
+                        Container(
+                          child: VideoProgressIndicator(
+                            _videoController,
+                            allowScrubbing: true,
+                            colors: VideoProgressColors(
+                                playedColor:
+                                    AppColors.whiteAuth.withOpacity(0.7),
+                                backgroundColor:
+                                    AppColors.whiteAuth.withOpacity((0.3))),
+                          ),
+                        )
+                      ],
                     ),
                   ),
                 )

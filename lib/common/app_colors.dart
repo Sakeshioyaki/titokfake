@@ -14,4 +14,5 @@ class AppColors {
   static const Color redAuth = Color(0xFFE6436D);
   static const Color whiteAuth = Color(0xFFFFFFFF);
   static const Color blackAuth = Color(0xFF000000);
+  static const Color GrayAuth = Color(0xFF8A8B8F);
 }
