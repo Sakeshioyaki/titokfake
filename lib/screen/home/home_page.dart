@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage>
         body: Stack(
           children: [
             TabBarView(
-              physics: ClampingScrollPhysics(),
+              physics: const ClampingScrollPhysics(),
               controller: _tabController,
               children: [
                 PageView(

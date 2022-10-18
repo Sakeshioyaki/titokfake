@@ -47,16 +47,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<Widget> _buildScreens() => [
         const HomePage(),
+        const Center(
+          child: Text('screen new'),
+        ),
+        const Center(
+          child: Text('screen new'),
+        ),
+        const Center(
+          child: Text('screen new'),
+        ),
         const ProfilePage(),
-        const Center(
-          child: Text('screen new'),
-        ),
-        const Center(
-          child: Text('screen new'),
-        ),
-        const Center(
-          child: Text('screen new'),
-        ),
       ];
 
   List<PersistentBottomNavBarItem> _navBarsItems() => [

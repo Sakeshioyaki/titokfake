@@ -18,4 +18,8 @@ class AppImages {
   static const String icNotification = 'assets/icons/noti_icon.png';
   static const String icShowMore = 'assets/icons/more_icon.png';
   static const String icBack = 'assets/icons/back_icon.png';
+  static const String icMore = 'assets/icons/more_1.png';
+  static const String icPhotoGallery = 'assets/icons/photo_icon.png';
+  static const String icLikeNotSeen = 'assets/icons/like_not_seen.png';
+  static const String icPlay = 'assets/icons/play_icon.png';static const String icSetting = 'assets/icons/settings.png';static const String icPeopleSetting = 'assets/icons/user_profile_icon.png';
 }

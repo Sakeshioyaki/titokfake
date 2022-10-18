@@ -3,6 +3,7 @@ import 'package:tiktok_fake/common/app_colors.dart';
 import 'package:tiktok_fake/screen/home/widget/left_panel.dart';
 import 'package:tiktok_fake/screen/home/widget/right_panel.dart';
 import 'package:video_player/video_player.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 class VideoPlayerItem extends StatefulWidget {
   final String? videoUrl;
@@ -40,6 +41,7 @@ class VideoPlayerItem extends StatefulWidget {
 class _VideoPlayerItemState extends State<VideoPlayerItem> {
   late VideoPlayerController _videoController;
   bool isShowPlaying = false;
+  double opacity = 0.4;
 
   @override
   void initState() {
@@ -47,12 +49,15 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
     super.initState();
 
     _videoController = VideoPlayerController.asset(widget.videoUrl!)
-      ..initialize().then((value) {
-        _videoController.play();
-        setState(() {
-          isShowPlaying = false;
-        });
-      });
+          ..initialize()
+        //     .then((value) {
+        //   _videoController.play();
+        //   setState(() {
+        //     isShowPlaying = false;
+        //   });
+        // })
+        ;
+    _videoController.setLooping(true);
   }
 
   @override
@@ -74,69 +79,82 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        setState(() {
-          _videoController.value.isPlaying
-              ? _videoController.pause()
-              : _videoController.play();
-        });
+    return VisibilityDetector(
+      key: ObjectKey(_videoController),
+      onVisibilityChanged: (visibility) {
+        if (visibility.visibleFraction > 0.9) {
+          setState(() {
+            opacity = 1;
+            _videoController.play();
+            isShowPlaying = false;
+          });
+        }
       },
-      child: RotatedBox(
-        quarterTurns: -1,
-        child: SizedBox(
-            height: widget.size.height,
-            width: widget.size.width,
-            child: Stack(
-              children: <Widget>[
-                Container(
-                  height: widget.size.height,
-                  width: widget.size.width,
-                  decoration: const BoxDecoration(color: AppColors.blackAuth),
-                  child: Stack(
-                    children: <Widget>[
-                      VideoPlayer(_videoController),
-                      Center(
-                        child: Container(
-                          decoration: const BoxDecoration(),
-                          child: isPlaying(),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: widget.size.height,
-                  width: widget.size.width,
-                  child: SafeArea(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: InkWell(
+        onTap: () {
+          setState(() {
+            _videoController.value.isPlaying
+                ? _videoController.pause()
+                : _videoController.play();
+          });
+        },
+        child: RotatedBox(
+          quarterTurns: -1,
+          child: SizedBox(
+              height: widget.size.height,
+              width: widget.size.width,
+              child: Stack(
+                children: [
+                  Container(
+                    height: widget.size.height,
+                    width: widget.size.width,
+                    decoration: const BoxDecoration(color: AppColors.blackAuth),
+                    child: Stack(
                       children: [
-                        Expanded(
+                        VideoPlayer(_videoController),
+                        Center(
+                          child: Container(
+                            decoration: const BoxDecoration(),
+                            child: isPlaying(),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: widget.size.height,
+                    width: widget.size.width,
+                    child: SafeArea(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                              child: Opacity(
+                            opacity: opacity,
                             child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.only(left: 10),
-                              child: LeftPanel(
-                                size: widget.size,
-                                name: "${widget.name}",
-                                caption: "${widget.caption}",
-                                songName: "${widget.songName}",
-                              ),
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: LeftPanel(
+                                    size: widget.size,
+                                    name: "${widget.name}",
+                                    caption: "${widget.caption}",
+                                    songName: "${widget.songName}",
+                                  ),
+                                ),
+                                RightPanel(
+                                  size: widget.size,
+                                  likes: "${widget.likes}",
+                                  comments: "${widget.comments}",
+                                  shares: "${widget.shares}",
+                                  profileImg: "${widget.profileImg}",
+                                  albumImg: "${widget.albumImg}",
+                                  bookMark: "${widget.bookMark}",
+                                ),
+                              ],
                             ),
-                            RightPanel(
-                              size: widget.size,
-                              likes: "${widget.likes}",
-                              comments: "${widget.comments}",
-                              shares: "${widget.shares}",
-                              profileImg: "${widget.profileImg}",
-                              albumImg: "${widget.albumImg}",
-                              bookMark: "${widget.bookMark}",
-                            ),
-                          ],
-                        )),
-                        Container(
-                          child: VideoProgressIndicator(
+                          )),
+                          VideoProgressIndicator(
                             _videoController,
                             allowScrubbing: true,
                             colors: VideoProgressColors(
@@ -144,14 +162,14 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
                                     AppColors.whiteAuth.withOpacity(0.7),
                                 backgroundColor:
                                     AppColors.whiteAuth.withOpacity((0.3))),
-                          ),
-                        )
-                      ],
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                )
-              ],
-            )),
+                  )
+                ],
+              )),
+        ),
       ),
     );
   }

@@ -36,47 +36,7 @@ class RightPanel extends StatelessWidget {
             const SizedBox(height: 23),
             GestureDetector(
                 onTap: () {
-                  showModalBottomSheet(
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(8.0),
-                      ),
-                    ),
-                    context: context,
-                    builder: (BuildContext context) {
-                      return Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 12,
-                        ),
-                        height: size.height * 0.75,
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const SizedBox(width: 10),
-                                Text(
-                                  "${comments!} bình luận",
-                                  style: AppTextStyle.textBlackS13Bold,
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Image.asset(
-                                    AppImages.icClose,
-                                    width: 13,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                    useRootNavigator: true,
-                  );
+                  buildCommentContent(context);
                 },
                 child: buildComments()),
             const SizedBox(height: 23),
@@ -100,6 +60,72 @@ class RightPanel extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Future<dynamic> buildCommentContent(BuildContext context) {
+    return showModalBottomSheet(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(8.0),
+        ),
+      ),
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 12,
+          ),
+          height: size.height * 0.75,
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const SizedBox(width: 10),
+                  Text(
+                    "${comments!} bình luận",
+                    style: AppTextStyle.textBlackS13Bold,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Image.asset(
+                      AppImages.icClose,
+                      width: 13,
+                    ),
+                  )
+                ],
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            AppImages.icPeopleSetting,
+                            width: 20,
+                          ),
+                          Column(
+                            children: [
+                              Text('Name'),
+                              Text('contentafjgafgslafg fkjsghfsdyfcskbfys')
+                            ],
+                          )
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              )
+            ],
+          ),
+        );
+      },
+      useRootNavigator: true,
     );
   }
 
