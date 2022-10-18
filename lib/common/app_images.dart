@@ -21,5 +21,10 @@ class AppImages {
   static const String icMore = 'assets/icons/more_1.png';
   static const String icPhotoGallery = 'assets/icons/photo_icon.png';
   static const String icLikeNotSeen = 'assets/icons/like_not_seen.png';
-  static const String icPlay = 'assets/icons/play_icon.png';static const String icSetting = 'assets/icons/settings.png';static const String icPeopleSetting = 'assets/icons/user_profile_icon.png';
+  static const String icPlay = 'assets/icons/play_icon.png';
+  static const String icSetting = 'assets/icons/settings.png';
+  static const String icPeopleSetting = 'assets/icons/user_profile_icon.png';
+  static const String icOutLineHeart = 'assets/icons/outLine_heart.png';
+  static const String icRedHeart = 'assets/icons/redHeart.png';
+  static const String icNotLike = 'assets/icons/dont_like.png';
 }

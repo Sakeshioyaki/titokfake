@@ -24,25 +24,32 @@ class AppTextStyle {
     fontSize: 10,
     fontWeight: FontWeight.bold,
   );
-  static final textWhiteS13 = textWhite.copyWith(
-    fontSize: 13,
+  static final textWhiteS14 = textWhite.copyWith(
+    fontSize: 14,
   );
 
-  static final textWhiterS13Bold = textWhite.copyWith(
-    fontSize: 13,
+  static final textWhiterS14Bold = textWhite.copyWith(
+    fontSize: 14,
     fontWeight: FontWeight.bold,
   );
-  static final textBlackS13 = textBlack.copyWith(
-    fontSize: 13,
+  static final textBlackS14 = textBlack.copyWith(
+    fontSize: 14,
   );
-  static final textBlackS13Bold = textBlack.copyWith(
-    fontSize: 13,
-    fontWeight: FontWeight.bold,
+  static final textBlackS14Bold = textBlack.copyWith(
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
   );
-  static final textGrayS13 = textGray.copyWith(
-    fontSize: 13,
+  static final textGrayS14 = textGray.copyWith(
+    fontSize: 14,
+  );
+  static final textGrayS14Semi = textGray.copyWith(
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
   );
   static final textBlackS16 = textBlack.copyWith(
+    fontSize: 16,
+  );
+  static final textBlackS16Semi = textBlack.copyWith(
     fontSize: 16,
     fontWeight: FontWeight.w600,
   );

@@ -111,7 +111,7 @@ class _ProfilePageState extends State<ProfilePage>
                                     const SizedBox(width: 10),
                                     Text(
                                       "Công cụ dành cho Tác giả",
-                                      style: AppTextStyle.textBlackS13Bold,
+                                      style: AppTextStyle.textBlackS14Bold,
                                     ),
                                   ],
                                 ),
@@ -145,7 +145,7 @@ class _ProfilePageState extends State<ProfilePage>
                                     const SizedBox(width: 10),
                                     Text(
                                       "Cài đặt quyền riêng tư",
-                                      style: AppTextStyle.textBlackS13Bold,
+                                      style: AppTextStyle.textBlackS14Bold,
                                     ),
                                   ],
                                 ),
@@ -231,7 +231,7 @@ class _ProfilePageState extends State<ProfilePage>
             const SizedBox(height: 10),
             Text(
               'No bio yet ',
-              style: AppTextStyle.textBlackS13,
+              style: AppTextStyle.textBlackS14,
             ),
             const SizedBox(height: 10),
             Container(
@@ -282,7 +282,7 @@ class _ProfilePageState extends State<ProfilePage>
                                 const SizedBox(width: 10),
                                 Text(
                                   '0',
-                                  style: AppTextStyle.textWhiteS13,
+                                  style: AppTextStyle.textWhiteS14,
                                 )
                               ],
                             ),
@@ -319,7 +319,7 @@ class _ProfilePageState extends State<ProfilePage>
                 ),
                 Text(
                   'Following',
-                  style: AppTextStyle.textGrayS13,
+                  style: AppTextStyle.textGrayS14,
                 ),
               ],
             ),
@@ -341,7 +341,7 @@ class _ProfilePageState extends State<ProfilePage>
                 ),
                 Text(
                   'Followers',
-                  style: AppTextStyle.textGrayS13,
+                  style: AppTextStyle.textGrayS14,
                 ),
               ],
             ),
@@ -361,7 +361,7 @@ class _ProfilePageState extends State<ProfilePage>
                 ),
                 Text(
                   'Likes',
-                  style: AppTextStyle.textGrayS13,
+                  style: AppTextStyle.textGrayS14,
                 ),
               ],
             ),

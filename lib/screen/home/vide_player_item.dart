@@ -154,15 +154,20 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
                               ],
                             ),
                           )),
-                          VideoProgressIndicator(
-                            _videoController,
-                            allowScrubbing: true,
-                            colors: VideoProgressColors(
-                                playedColor:
-                                    AppColors.whiteAuth.withOpacity(0.7),
-                                backgroundColor:
-                                    AppColors.whiteAuth.withOpacity((0.3))),
-                          )
+                          Container(
+                            color: Colors.red,
+                            width: MediaQuery.of(context).size.width,
+                            height: 2,
+                          ),
+                          // VideoProgressIndicator(
+                          //   _videoController,
+                          //   allowScrubbing: true,
+                          //   colors: VideoProgressColors(
+                          //       playedColor:
+                          //           AppColors.whiteAuth.withOpacity(0.7),
+                          //       backgroundColor:
+                          //           AppColors.whiteAuth.withOpacity((0.3))),
+                          // )
                         ],
                       ),
                     ),

@@ -49,7 +49,7 @@ class RightPanel extends StatelessWidget {
                 const SizedBox(height: 6),
                 Text(
                   bookMark!,
-                  style: AppTextStyle.textWhiteS13,
+                  style: AppTextStyle.textWhiteS14,
                 ),
               ],
             ),
@@ -86,7 +86,7 @@ class RightPanel extends StatelessWidget {
                   const SizedBox(width: 10),
                   Text(
                     "${comments!} bình luận",
-                    style: AppTextStyle.textBlackS13Bold,
+                    style: AppTextStyle.textBlackS14Bold,
                   ),
                   GestureDetector(
                     onTap: () {
@@ -103,16 +103,64 @@ class RightPanel extends StatelessWidget {
                 child: ListView.builder(
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Image.asset(
-                            AppImages.icPeopleSetting,
-                            width: 20,
-                          ),
-                          Column(
+                          Row(
                             children: [
-                              Text('Name'),
-                              Text('contentafjgafgslafg fkjsghfsdyfcskbfys')
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(17),
+                                child: Image.network(
+                                  'https://p16-tiktokcdn-com.akamaized.net/aweme/720x720/tiktok-obj/ba13e655825553a46b1913705e3a8617.jpeg',
+                                  width: 34,
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Name',
+                                    style: AppTextStyle.textGrayS14Semi,
+                                  ),
+                                  SizedBox(height: 4),
+                                  Text(
+                                    'dfdsagdsgasfasdf ',
+                                    style: AppTextStyle.textBlackS16,
+                                    overflow: TextOverflow.fade,
+                                    maxLines: 2,
+                                    softWrap: false,
+                                  ),
+                                  SizedBox(height: 3),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '5h',
+                                        style: AppTextStyle.textGrayS14,
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Text(
+                                        'Reply',
+                                        style: AppTextStyle.textGrayS14Semi,
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Image.asset(AppImages.icOutLineHeart, width: 18),
+                              SizedBox(
+                                width: 60,
+                                child: Text(
+                                  ' 256',
+                                  style: AppTextStyle.textGrayS14,
+                                ),
+                              ),
+                              Image.asset(AppImages.icNotLike, height: 18),
                             ],
                           )
                         ],
@@ -168,7 +216,7 @@ class RightPanel extends StatelessWidget {
         const SizedBox(height: 6),
         Text(
           comments!,
-          style: AppTextStyle.textWhiteS13,
+          style: AppTextStyle.textWhiteS14,
         ),
       ],
     );
@@ -184,7 +232,7 @@ class RightPanel extends StatelessWidget {
         const SizedBox(height: 6),
         Text(
           shares!,
-          style: AppTextStyle.textWhiteS13,
+          style: AppTextStyle.textWhiteS14,
         ),
       ],
     );
@@ -200,7 +248,7 @@ class RightPanel extends StatelessWidget {
         const SizedBox(height: 6),
         Text(
           likes!,
-          style: AppTextStyle.textWhiteS13,
+          style: AppTextStyle.textWhiteS14,
         ),
       ],
     );

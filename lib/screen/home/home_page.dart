@@ -4,6 +4,7 @@ import 'package:tiktok_fake/common/app_images.dart';
 import 'package:tiktok_fake/common/app_text_styles.dart';
 import 'package:tiktok_fake/const/data_json.dart';
 import 'package:tiktok_fake/screen/home/vide_player_item.dart';
+import 'package:tiktok_fake/screen/home/widget/indicator_custom.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -27,7 +28,10 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    List<Tab> tapsList = [Tab(text: 'Đang Follow'), Tab(text: 'Dành cho bạn')];
+    List<Tab> tapsList = [
+      const Tab(text: 'Đang Follow '),
+      const Tab(text: 'Dành cho bạn')
+    ];
     var size = MediaQuery.of(context).size;
 
     return DefaultTabController(
@@ -90,40 +94,35 @@ class _HomePageState extends State<HomePage>
             ),
             SafeArea(
               child: Container(
-                alignment: Alignment.topCenter,
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      child: Image.asset(
-                        AppImages.icLiveIcon,
-                        width: 24,
-                      ),
+                    Image.asset(
+                      AppImages.icLiveIcon,
+                      width: 28,
                     ),
-                    SizedBox(
+                    Container(
                       width: 280,
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: TabBar(
                         isScrollable: true,
-                        padding: EdgeInsets.only(top: 10),
                         unselectedLabelColor:
                             AppColors.whiteAuth.withOpacity(0.5),
                         labelColor: AppColors.whiteAuth,
                         controller: _tabController,
                         tabs: tapsList,
-                        labelStyle: AppTextStyle.textWhiterS16Bold,
-                        indicator: const UnderlineTabIndicator(
-                          borderSide: BorderSide(
-                              width: 3.0, color: AppColors.whiteAuth),
-                          insets: EdgeInsets.symmetric(horizontal: 40),
-                        ),
+                        labelStyle: AppTextStyle.textWhiterS14Bold,
+                        indicator: CircleTabIndicator(
+                            color: AppColors.whiteAuth,
+                            radius: 1.5,
+                            width: 30,
+                            weight: 3.0),
                       ),
                     ),
-                    Container(
-                      child: Image.asset(
-                        AppImages.icDiscover,
-                        width: 20,
-                      ),
+                    Image.asset(
+                      AppImages.icSearch,
+                      width: 24,
                     ),
                   ],
                 ),
