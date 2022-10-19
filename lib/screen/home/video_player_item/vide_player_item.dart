@@ -43,6 +43,8 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
   bool isShowPlaying = false;
   double opacity = 0.4;
   bool showIndicator = false;
+  Duration process = Duration(milliseconds: 0);
+  late Duration total = Duration(milliseconds: 0);
 
   @override
   void initState() {
@@ -50,14 +52,23 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
     super.initState();
 
     _videoController = VideoPlayerController.asset(widget.videoUrl!)
-          ..initialize()
-        //     .then((value) {
-        //   _videoController.play();
-        //   setState(() {
-        //     isShowPlaying = false;
-        //   });
-        // })
-        ;
+      ..initialize()
+      ..addListener(() {
+        setState(() {
+          process = _videoController.value.position;
+          print('duration ${_videoController.value.duration}');
+          if (total == Duration(milliseconds: 0)) {
+            setState(() {
+              total = _videoController.value.duration;
+              print('duration ${_videoController.value.duration}');
+              print('duration ${total}');
+            });
+          }
+        });
+      });
+    // setState(() {
+    //   total = _videoController.value.duration;
+    // });
     _videoController.setLooping(true);
   }
 
@@ -164,13 +175,21 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
                           )),
                           showIndicator
                               ? ProgressBar(
-                                  progress: const Duration(milliseconds: 1000),
+                                  progress: process,
                                   buffered: const Duration(milliseconds: 2000),
-                                  total: const Duration(milliseconds: 5000),
+                                  total: total,
+                                  onSeek: (process) {
+                                    _videoController.seekTo(process);
+                                  },
+                                  onDragUpdate: (details) {
+                                    setState(() {
+                                      process = details.timeStamp;
+                                    });
+                                  },
                                   thumbCanPaintOutsideBar: false,
                                   timeLabelLocation: TimeLabelLocation.none,
                                   barHeight: 2,
-                                  thumbRadius: 2,
+                                  thumbRadius: 1,
                                   thumbGlowRadius: 8,
                                   bufferedBarColor:
                                       AppColors.whiteAuth.withOpacity(0.5),
@@ -179,7 +198,7 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
                                   progressBarColor:
                                       AppColors.whiteAuth.withOpacity(0.7),
                                   thumbColor:
-                                      AppColors.whiteAuth.withOpacity(0.8))
+                                      AppColors.whiteAuth.withOpacity(0.9))
                               : const SizedBox(),
                           // VideoProgressIndicator(
                           //   _videoController,

@@ -101,70 +101,158 @@ class RightPanel extends StatelessWidget {
               ),
               Expanded(
                 child: ListView.builder(
+                  itemCount: 10,
                   itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
+                    return Column(
+                      children: [
+                        Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(17),
-                                child: Image.network(
-                                  'https://p16-tiktokcdn-com.akamaized.net/aweme/720x720/tiktok-obj/ba13e655825553a46b1913705e3a8617.jpeg',
-                                  width: 34,
-                                ),
-                              ),
-                              const SizedBox(width: 12),
-                              Column(
+                              Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    'Name',
-                                    style: AppTextStyle.textGrayS14Semi,
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(17),
+                                    child: Image.network(
+                                      'https://p16-tiktokcdn-com.akamaized.net/aweme/720x720/tiktok-obj/ba13e655825553a46b1913705e3a8617.jpeg',
+                                      width: 34,
+                                    ),
                                   ),
-                                  SizedBox(height: 4),
-                                  Text(
-                                    'dfdsagdsgasfasdf ',
-                                    style: AppTextStyle.textBlackS16,
-                                    overflow: TextOverflow.fade,
-                                    maxLines: 2,
-                                    softWrap: false,
-                                  ),
-                                  SizedBox(height: 3),
-                                  Row(
+                                  const SizedBox(width: 12),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        '5h',
-                                        style: AppTextStyle.textGrayS14,
-                                      ),
-                                      const SizedBox(width: 8),
-                                      Text(
-                                        'Reply',
+                                        'Name',
                                         style: AppTextStyle.textGrayS14Semi,
+                                      ),
+                                      SizedBox(height: 4),
+                                      Text(
+                                        'dfdsagdsgasfasdf ',
+                                        style: AppTextStyle.textBlackS16,
+                                        overflow: TextOverflow.fade,
+                                        maxLines: 2,
+                                        softWrap: false,
+                                      ),
+                                      SizedBox(height: 5),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            '5h',
+                                            style: AppTextStyle.textGrayS14,
+                                          ),
+                                          const SizedBox(width: 8),
+                                          GestureDetector(
+                                            onTap: () {},
+                                            child: Text(
+                                              'Reply',
+                                              style:
+                                                  AppTextStyle.textGrayS14Semi,
+                                            ),
+                                          ),
+                                          SizedBox(width: 125),
+                                          Image.asset(AppImages.icOutLineHeart,
+                                              width: 18),
+                                          SizedBox(
+                                            width: 60,
+                                            child: Text(
+                                              ' 256',
+                                              style: AppTextStyle.textGrayS14,
+                                            ),
+                                          ),
+                                          Image.asset(AppImages.icNotLike,
+                                              height: 18),
+                                        ],
                                       )
                                     ],
-                                  )
+                                  ),
                                 ],
                               ),
                             ],
                           ),
-                          Row(
+                        ),
+                        SizedBox(height: 5),
+                        Container(
+                          // color: AppColors.whiteGrayAuth,
+                          padding: EdgeInsets.only(left: 45),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Image.asset(AppImages.icOutLineHeart, width: 18),
-                              SizedBox(
-                                width: 60,
-                                child: Text(
-                                  ' 256',
-                                  style: AppTextStyle.textGrayS14,
-                                ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(17),
+                                    child: Image.network(
+                                      'https://p16-tiktokcdn-com.akamaized.net/aweme/720x720/tiktok-obj/ba13e655825553a46b1913705e3a8617.jpeg',
+                                      width: 34,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Name',
+                                        style: AppTextStyle.textGrayS14Semi,
+                                      ),
+                                      SizedBox(height: 4),
+                                      Text(
+                                        'dfdsagdsgasfasdf ',
+                                        style: AppTextStyle.textBlackS16,
+                                        overflow: TextOverflow.fade,
+                                        maxLines: 2,
+                                        softWrap: false,
+                                      ),
+                                      SizedBox(height: 5),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            '5h',
+                                            style: AppTextStyle.textGrayS14,
+                                          ),
+                                          const SizedBox(width: 8),
+                                          GestureDetector(
+                                            onTap: () {},
+                                            child: Text(
+                                              'Reply',
+                                              style:
+                                                  AppTextStyle.textGrayS14Semi,
+                                            ),
+                                          ),
+                                          SizedBox(width: 80),
+                                          Image.asset(AppImages.icOutLineHeart,
+                                              width: 18),
+                                          SizedBox(
+                                            width: 60,
+                                            child: Text(
+                                              ' 256',
+                                              style: AppTextStyle.textGrayS14,
+                                            ),
+                                          ),
+                                          Image.asset(AppImages.icNotLike,
+                                              height: 18),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ],
                               ),
-                              Image.asset(AppImages.icNotLike, height: 18),
                             ],
-                          )
-                        ],
-                      ),
+                          ),
+                        )
+                      ],
                     );
                   },
                 ),
