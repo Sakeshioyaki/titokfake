@@ -1,3 +1,4 @@
+import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:tiktok_fake/common/app_colors.dart';
 import 'package:tiktok_fake/screen/home/widget/left_panel.dart';
@@ -16,6 +17,7 @@ class VideoPlayerItem extends StatefulWidget {
   final String? shares;
   final String? albumImg;
   final String? bookMark;
+  final Size size;
 
   VideoPlayerItem({
     Key? key,
@@ -32,8 +34,6 @@ class VideoPlayerItem extends StatefulWidget {
     this.bookMark,
   }) : super(key: key);
 
-  final Size size;
-
   @override
   _VideoPlayerItemState createState() => _VideoPlayerItemState();
 }
@@ -42,6 +42,7 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
   late VideoPlayerController _videoController;
   bool isShowPlaying = false;
   double opacity = 0.4;
+  bool showIndicator = false;
 
   @override
   void initState() {
@@ -87,8 +88,14 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
             opacity = 1;
             _videoController.play();
             isShowPlaying = false;
+            showIndicator = true;
           });
         }
+        // if (visibility.visibleFraction == 1) {
+        //   setState(() {
+        //     showIndicator = true;
+        //   });
+        // }
       },
       child: InkWell(
         onTap: () {
@@ -96,6 +103,7 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
             _videoController.value.isPlaying
                 ? _videoController.pause()
                 : _videoController.play();
+            // showIndicator = false;
           });
         },
         child: RotatedBox(
@@ -154,11 +162,25 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
                               ],
                             ),
                           )),
-                          Container(
-                            color: Colors.red,
-                            width: MediaQuery.of(context).size.width,
-                            height: 2,
-                          ),
+                          showIndicator
+                              ? ProgressBar(
+                                  progress: const Duration(milliseconds: 1000),
+                                  buffered: const Duration(milliseconds: 2000),
+                                  total: const Duration(milliseconds: 5000),
+                                  thumbCanPaintOutsideBar: false,
+                                  timeLabelLocation: TimeLabelLocation.none,
+                                  barHeight: 2,
+                                  thumbRadius: 2,
+                                  thumbGlowRadius: 8,
+                                  bufferedBarColor:
+                                      AppColors.whiteAuth.withOpacity(0.5),
+                                  baseBarColor:
+                                      AppColors.whiteAuth.withOpacity(0.4),
+                                  progressBarColor:
+                                      AppColors.whiteAuth.withOpacity(0.7),
+                                  thumbColor:
+                                      AppColors.whiteAuth.withOpacity(0.8))
+                              : const SizedBox(),
                           // VideoProgressIndicator(
                           //   _videoController,
                           //   allowScrubbing: true,

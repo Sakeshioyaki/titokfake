@@ -3,7 +3,7 @@ import 'package:tiktok_fake/common/app_colors.dart';
 import 'package:tiktok_fake/common/app_images.dart';
 import 'package:tiktok_fake/common/app_text_styles.dart';
 import 'package:tiktok_fake/const/data_json.dart';
-import 'package:tiktok_fake/screen/home/vide_player_item.dart';
+import 'package:tiktok_fake/screen/home/video_player_item/vide_player_item.dart';
 import 'package:tiktok_fake/screen/home/widget/indicator_custom.dart';
 
 class HomePage extends StatefulWidget {
