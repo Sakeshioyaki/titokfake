@@ -1,6 +1,7 @@
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:tiktok_fake/common/app_colors.dart';
+import 'package:tiktok_fake/common/app_text_styles.dart';
 import 'package:tiktok_fake/screen/home/widget/left_panel.dart';
 import 'package:tiktok_fake/screen/home/widget/right_panel.dart';
 import 'package:video_player/video_player.dart';
@@ -43,8 +44,12 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
   bool isShowPlaying = false;
   double opacity = 0.4;
   bool showIndicator = false;
+  bool big = false;
+  bool showTime = false;
+  bool showInfor = true;
   Duration process = Duration(milliseconds: 0);
   late Duration total = Duration(milliseconds: 0);
+  late int time = 0;
 
   @override
   void initState() {
@@ -150,65 +155,120 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
                           Expanded(
                               child: Opacity(
                             opacity: opacity,
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10),
-                                  child: LeftPanel(
-                                    size: widget.size,
-                                    name: "${widget.name}",
-                                    caption: "${widget.caption}",
-                                    songName: "${widget.songName}",
+                            child: showInfor
+                                ? Row(
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 10),
+                                        child: LeftPanel(
+                                          size: widget.size,
+                                          name: "${widget.name}",
+                                          caption: "${widget.caption}",
+                                          songName: "${widget.songName}",
+                                        ),
+                                      ),
+                                      RightPanel(
+                                        size: widget.size,
+                                        likes: "${widget.likes}",
+                                        comments: "${widget.comments}",
+                                        shares: "${widget.shares}",
+                                        profileImg: "${widget.profileImg}",
+                                        albumImg: "${widget.albumImg}",
+                                        bookMark: "${widget.bookMark}",
+                                      ),
+                                    ],
+                                  )
+                                : SizedBox(),
+                          )),
+                          showInfor
+                              ? SizedBox()
+                              : Container(
+                                  padding: EdgeInsets.only(bottom: 30),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Text(
+                                              '${process.inMinutes}:${process.inSeconds}',
+                                              style: AppTextStyle.textWhite
+                                                  .copyWith(
+                                                      fontSize: 30,
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                          Text(
+                                            '  /  ',
+                                            style: AppTextStyle.textWhiterS16,
+                                          ),
+                                          Text(
+                                            '${total.inMinutes}:${total.inSeconds}',
+                                            style: AppTextStyle.textWhite
+                                                .copyWith(
+                                                    fontSize: 30,
+                                                    color: Colors.white
+                                                        .withOpacity(0.5),
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                          ),
+                                        ],
+                                      )
+                                    ],
                                   ),
                                 ),
-                                RightPanel(
-                                  size: widget.size,
-                                  likes: "${widget.likes}",
-                                  comments: "${widget.comments}",
-                                  shares: "${widget.shares}",
-                                  profileImg: "${widget.profileImg}",
-                                  albumImg: "${widget.albumImg}",
-                                  bookMark: "${widget.bookMark}",
-                                ),
-                              ],
-                            ),
-                          )),
+                          SizedBox(height: 10),
                           showIndicator
-                              ? ProgressBar(
-                                  progress: process,
-                                  buffered: const Duration(milliseconds: 2000),
-                                  total: total,
-                                  onSeek: (process) {
-                                    _videoController.seekTo(process);
-                                  },
-                                  onDragUpdate: (details) {
-                                    setState(() {
-                                      process = details.timeStamp;
-                                    });
-                                  },
-                                  thumbCanPaintOutsideBar: false,
-                                  timeLabelLocation: TimeLabelLocation.none,
-                                  barHeight: 2,
-                                  thumbRadius: 1,
-                                  thumbGlowRadius: 8,
-                                  bufferedBarColor:
-                                      AppColors.whiteAuth.withOpacity(0.5),
-                                  baseBarColor:
-                                      AppColors.whiteAuth.withOpacity(0.4),
-                                  progressBarColor:
-                                      AppColors.whiteAuth.withOpacity(0.7),
-                                  thumbColor:
-                                      AppColors.whiteAuth.withOpacity(0.9))
+                              ? GestureDetector(
+                                  child: ProgressBar(
+                                      progress: process,
+                                      buffered:
+                                          const Duration(milliseconds: 2000),
+                                      total: total,
+                                      onSeek: (process) {
+                                        _videoController.seekTo(process);
+                                      },
+                                      onDragUpdate: (details) {
+                                        setState(() {
+                                          process = details.timeStamp;
+                                        });
+                                      },
+                                      onDragStart: (ThumbDragDetails details) {
+                                        setState(() {
+                                          big = true;
+                                          showInfor = false;
+                                          // _videoController.pause();
+                                          time = details.timeStamp.inSeconds;
+                                          // _videoController
+                                          //     .seekTo(details.timeStamp);
+                                          // time = TimeLabelType.values.
+                                        });
+                                      },
+                                      onDragEnd: () {
+                                        setState(() {
+                                          big = false;
+                                          showInfor = true;
+
+                                          // _videoController.play();
+                                        });
+                                      },
+                                      thumbCanPaintOutsideBar: false,
+                                      timeLabelLocation: TimeLabelLocation.none,
+                                      barHeight: big ? 8 : 3,
+                                      thumbRadius: 1,
+                                      thumbGlowRadius: 8,
+                                      timeLabelTextStyle:
+                                          AppTextStyle.textWhiterS16Bold,
+                                      bufferedBarColor:
+                                          AppColors.whiteAuth.withOpacity(0.5),
+                                      baseBarColor:
+                                          AppColors.whiteAuth.withOpacity(0.4),
+                                      progressBarColor:
+                                          AppColors.whiteAuth.withOpacity(0.7),
+                                      thumbColor:
+                                          AppColors.whiteAuth.withOpacity(1)),
+                                )
                               : const SizedBox(),
-                          // VideoProgressIndicator(
-                          //   _videoController,
-                          //   allowScrubbing: true,
-                          //   colors: VideoProgressColors(
-                          //       playedColor:
-                          //           AppColors.whiteAuth.withOpacity(0.7),
-                          //       backgroundColor:
-                          //           AppColors.whiteAuth.withOpacity((0.3))),
-                          // )
                         ],
                       ),
                     ),

@@ -175,131 +175,155 @@ class _ProfilePageState extends State<ProfilePage>
         ],
         backgroundColor: AppColors.whiteAuth,
       ),
-      body: Container(
-        color: AppColors.whiteAuth,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const SizedBox(height: 16),
-            Center(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(45),
-                child: Image.network(
-                  'https://p16-tiktokcdn-com.akamaized.net/aweme/720x720/tiktok-obj/ba13e655825553a46b1913705e3a8617.jpeg',
-                  width: 100,
-                ),
-              ),
-            ),
-            const SizedBox(height: 11),
-            Text(
-              '@Someone',
-              style: AppTextStyle.textBlackS16,
-            ),
-            buildInformation(),
-            const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+      body: SizedBox(
+        height: double.infinity,
+        width: double.infinity,
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: Container(
+            // height: 500,
+            color: AppColors.whiteAuth,
+            child: Column(
               children: [
-                TextButton(
-                  onPressed: () {},
-                  child: Container(
-                    alignment: Alignment.center,
-                    height: 40,
-                    width: 150,
-                    color: AppColors.redAccent,
-                    child: Text(
-                      'Follow',
-                      style: AppTextStyle.textWhiterS16,
-                    ),
-                  ),
-                ),
-                Container(
-                  height: 40,
-                  width: 40,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.grayLightAuth)),
-                  child: Center(
-                    child: Image.asset(
-                      AppImages.icMore,
-                      height: 10,
-                      width: 10,
-                    ),
-                  ),
-                ),
+                buildHeader(),
+                SizedBox(
+                    height: MediaQuery.of(context).size.height - 364,
+                    width: MediaQuery.of(context).size.width,
+                    child: buildTabBarView()),
               ],
             ),
-            const SizedBox(height: 10),
-            Text(
-              'No bio yet ',
-              style: AppTextStyle.textBlackS14,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Column buildHeader() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        const SizedBox(height: 16),
+        Center(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(45),
+            child: Image.network(
+              'https://p16-tiktokcdn-com.akamaized.net/aweme/720x720/tiktok-obj/ba13e655825553a46b1913705e3a8617.jpeg',
+              width: 100,
             ),
-            const SizedBox(height: 10),
-            Container(
-              decoration: BoxDecoration(
-                  border: Border.all(color: AppColors.whiteGrayAuth)),
-              height: 40,
-              child: TabBar(
-                tabs: listTab,
-                indicator: const UnderlineTabIndicator(
-                  borderSide:
-                      BorderSide(color: AppColors.blackAuth, width: 2.0),
-                  insets: EdgeInsets.symmetric(horizontal: 75),
+          ),
+        ),
+        const SizedBox(height: 11),
+        Text(
+          '@Someone',
+          style: AppTextStyle.textBlackS16,
+        ),
+        buildInformation(),
+        const SizedBox(height: 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextButton(
+              onPressed: () {},
+              child: Container(
+                alignment: Alignment.center,
+                height: 40,
+                width: 150,
+                color: AppColors.redAccent,
+                child: Text(
+                  'Follow',
+                  style: AppTextStyle.textWhiterS16,
                 ),
-                controller: _tabController,
               ),
             ),
-            Expanded(
-              child: TabBarView(
-                controller: _tabController,
-                children: [
-                  GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                    ),
-                    itemCount: listImage.length,
-                    // padding: const EdgeInsets.all(2),
-                    itemBuilder: (_, int index) {
-                      return Stack(
-                        fit: StackFit.expand,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(1),
-                            child: VideoPlayerItem(
-                              videoUrl: 'assets/videos/video_1.mp4',
-                            ),
-                          ),
-                          Container(
-                            padding:
-                                const EdgeInsets.only(left: 10, bottom: 10),
-                            alignment: Alignment.bottomLeft,
-                            child: Row(
-                              children: [
-                                Image.asset(
-                                  AppImages.icPlay,
-                                  height: 12,
-                                ),
-                                const SizedBox(width: 10),
-                                Text(
-                                  '0',
-                                  style: AppTextStyle.textWhiteS14,
-                                )
-                              ],
-                            ),
-                          )
-                        ],
-                      );
-                    },
-                  ),
-                  const Center(
-                    child: Text("It's rainy here"),
-                  ),
-                ],
+            Container(
+              height: 40,
+              width: 40,
+              decoration: BoxDecoration(
+                  border: Border.all(color: AppColors.grayLightAuth)),
+              child: Center(
+                child: Image.asset(
+                  AppImages.icMore,
+                  height: 10,
+                  width: 10,
+                ),
               ),
             ),
           ],
         ),
-      ),
+        const SizedBox(height: 10),
+        Text(
+          'No bio yet ',
+          style: AppTextStyle.textBlackS14,
+        ),
+        const SizedBox(height: 10),
+        Container(
+          decoration:
+              BoxDecoration(border: Border.all(color: AppColors.whiteGrayAuth)),
+          height: 40,
+          child: TabBar(
+            tabs: listTab,
+            indicator: const UnderlineTabIndicator(
+              borderSide: BorderSide(color: AppColors.blackAuth, width: 2.0),
+              insets: EdgeInsets.symmetric(horizontal: 75),
+            ),
+            controller: _tabController,
+          ),
+        ),
+        // buildTabBarView(),
+      ],
+    );
+  }
+
+  Widget buildTabBarView() {
+    return TabBarView(
+      controller: _tabController,
+      children: [
+        GridView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            mainAxisSpacing: 2,
+            crossAxisSpacing: 2,
+            childAspectRatio: 1 / 1.3,
+          ),
+          itemCount: listImage.length,
+          // padding: const EdgeInsets.all(2),
+          itemBuilder: (_, int index) {
+            return Container(
+              color: Colors.redAccent,
+              child: Stack(
+                fit: StackFit.loose,
+                children: [
+                  VideoPlayerItem(
+                    videoUrl: 'assets/videos/video_1.mp4',
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(left: 10, bottom: 10),
+                    alignment: Alignment.bottomLeft,
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          AppImages.icPlay,
+                          height: 12,
+                        ),
+                        const SizedBox(width: 10),
+                        Text(
+                          '0',
+                          style: AppTextStyle.textWhiteS14,
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+        const Center(
+          child: Text("It's rainy here"),
+        ),
+      ],
     );
   }
 
