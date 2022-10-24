@@ -43,7 +43,7 @@ class LeftPanel extends StatelessWidget {
             height: 5,
           ),
           Row(
-            children: <Widget>[
+            children: [
               const Icon(
                 Icons.music_note,
                 color: AppColors.whiteAuth,

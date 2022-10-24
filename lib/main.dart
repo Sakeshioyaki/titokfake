@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:tiktok_fake/common/app_images.dart';
 import 'package:tiktok_fake/common/app_text_styles.dart';
-import 'package:tiktok_fake/screen/home/home_page.dart';
-import 'package:tiktok_fake/screen/profile/profile_page.dart';
+import 'package:tiktok_fake/screens/home_page/home_page.dart';
+import 'package:tiktok_fake/screens/profile_page/profile_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +12,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -40,9 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    // _controller = PersistentTabController(initialIndex: 0);
   }
 
   List<Widget> _buildScreens() => [
@@ -156,7 +153,8 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.black,
         handleAndroidBackButtonPress: true,
         resizeToAvoidBottomInset: true,
-        stateManagement: true, // Default is true.
+        stateManagement: true,
+        // Default is true.
         hideNavigationBarWhenKeyboardShows: true,
         decoration: const NavBarDecoration(
           colorBehindNavBar: Colors.white,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tiktok_fake/common/app_colors.dart';
 import 'package:tiktok_fake/common/app_images.dart';
 import 'package:tiktok_fake/common/app_text_styles.dart';
-import 'package:tiktok_fake/screen/profile/Widget/video_item.dart';
+import 'package:tiktok_fake/screens/profile_page/Widget/video_item.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({
@@ -269,7 +269,6 @@ class _ProfilePageState extends State<ProfilePage>
             controller: _tabController,
           ),
         ),
-        // buildTabBarView(),
       ],
     );
   }
@@ -280,7 +279,7 @@ class _ProfilePageState extends State<ProfilePage>
       children: [
         GridView.builder(
           shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
             mainAxisSpacing: 2,
@@ -288,7 +287,6 @@ class _ProfilePageState extends State<ProfilePage>
             childAspectRatio: 1 / 1.3,
           ),
           itemCount: listImage.length,
-          // padding: const EdgeInsets.all(2),
           itemBuilder: (_, int index) {
             return Container(
               color: Colors.redAccent,
