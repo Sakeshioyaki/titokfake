@@ -62,7 +62,7 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
         setState(() {
           process = _videoController.value.position;
           print('duration ${_videoController.value.duration}');
-          if (total == Duration(milliseconds: 0)) {
+          if (total == const Duration(milliseconds: 0)) {
             setState(() {
               total = _videoController.value.duration;
               print('duration ${_videoController.value.duration}');
@@ -119,6 +119,7 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
             _videoController.value.isPlaying
                 ? _videoController.pause()
                 : _videoController.play();
+            _videoController.value.isPlaying ? big = false : big = true;
             // showIndicator = false;
           });
         },
@@ -194,7 +195,7 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
                                               '${process.inMinutes}:${process.inSeconds}',
                                               style: AppTextStyle.textWhite
                                                   .copyWith(
-                                                      fontSize: 30,
+                                                      fontSize: 24,
                                                       color: Colors.white,
                                                       fontWeight:
                                                           FontWeight.bold)),
@@ -206,7 +207,7 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
                                             '${total.inMinutes}:${total.inSeconds}',
                                             style: AppTextStyle.textWhite
                                                 .copyWith(
-                                                    fontSize: 30,
+                                                    fontSize: 24,
                                                     color: Colors.white
                                                         .withOpacity(0.5),
                                                     fontWeight:
@@ -220,53 +221,66 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
                           SizedBox(height: 10),
                           showIndicator
                               ? GestureDetector(
-                                  child: ProgressBar(
-                                      progress: process,
-                                      buffered:
-                                          const Duration(milliseconds: 2000),
-                                      total: total,
-                                      onSeek: (process) {
-                                        _videoController.seekTo(process);
-                                      },
-                                      onDragUpdate: (details) {
-                                        setState(() {
-                                          process = details.timeStamp;
-                                        });
-                                      },
-                                      onDragStart: (ThumbDragDetails details) {
-                                        setState(() {
-                                          big = true;
-                                          showInfor = false;
-                                          // _videoController.pause();
-                                          time = details.timeStamp.inSeconds;
-                                          // _videoController
-                                          //     .seekTo(details.timeStamp);
-                                          // time = TimeLabelType.values.
-                                        });
-                                      },
-                                      onDragEnd: () {
-                                        setState(() {
-                                          big = false;
-                                          showInfor = true;
+                                  onForcePressStart: (ForcePressDetails f) {
+                                    setState(() {
+                                      big = true;
+                                    });
+                                    print('tappp');
+                                  },
+                                  child: Container(
+                                    // color: Colors.red,
+                                    height: 4,
+                                    alignment: Alignment.bottomRight,
+                                    child: ProgressBar(
+                                        progress: process,
+                                        buffered:
+                                            const Duration(milliseconds: 2000),
+                                        total: total,
+                                        onSeek: (process) {
+                                          _videoController.seekTo(process);
+                                        },
+                                        onDragUpdate: (details) {
+                                          setState(() {
+                                            process = details.timeStamp;
+                                          });
+                                        },
+                                        onDragStart:
+                                            (ThumbDragDetails details) {
+                                          setState(() {
+                                            big = true;
+                                            showInfor = false;
+                                            // _videoController.pause();
+                                            time = details.timeStamp.inSeconds;
+                                            // _videoController
+                                            //     .seekTo(details.timeStamp);
+                                            // time = TimeLabelType.values.
+                                          });
+                                        },
+                                        onDragEnd: () {
+                                          setState(() {
+                                            big = false;
+                                            showInfor = true;
 
-                                          // _videoController.play();
-                                        });
-                                      },
-                                      thumbCanPaintOutsideBar: false,
-                                      timeLabelLocation: TimeLabelLocation.none,
-                                      barHeight: big ? 8 : 3,
-                                      thumbRadius: 1,
-                                      thumbGlowRadius: 8,
-                                      timeLabelTextStyle:
-                                          AppTextStyle.textWhiterS16Bold,
-                                      bufferedBarColor:
-                                          AppColors.whiteAuth.withOpacity(0.5),
-                                      baseBarColor:
-                                          AppColors.whiteAuth.withOpacity(0.4),
-                                      progressBarColor:
-                                          AppColors.whiteAuth.withOpacity(0.7),
-                                      thumbColor:
-                                          AppColors.whiteAuth.withOpacity(1)),
+                                            // _videoController.play();
+                                          });
+                                        },
+                                        thumbCanPaintOutsideBar: true,
+                                        timeLabelLocation:
+                                            TimeLabelLocation.none,
+                                        barHeight: big ? 4 : 1.5,
+                                        thumbRadius: 1,
+                                        thumbGlowRadius: 9,
+                                        timeLabelTextStyle:
+                                            AppTextStyle.textWhiterS16Bold,
+                                        bufferedBarColor: AppColors.whiteAuth
+                                            .withOpacity(0.5),
+                                        baseBarColor: AppColors.whiteAuth
+                                            .withOpacity(0.4),
+                                        progressBarColor: AppColors.whiteAuth
+                                            .withOpacity(0.7),
+                                        thumbColor:
+                                            AppColors.whiteAuth.withOpacity(1)),
+                                  ),
                                 )
                               : const SizedBox(),
                         ],
