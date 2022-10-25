@@ -1,8 +1,6 @@
 import 'package:get/get.dart';
-import 'package:video_player/video_player.dart';
 
 class VideoPlayerItemController extends GetxController {
-  late VideoPlayerController videoController;
   bool isShowPlaying = false;
   double opacity = 0.4;
   bool showIndicator = false;
@@ -24,6 +22,7 @@ class VideoPlayerItemController extends GetxController {
   }
 
   setTime(int s) {
+    print('set time ');
     time = s;
     update();
   }
@@ -39,6 +38,7 @@ class VideoPlayerItemController extends GetxController {
   }
 
   setBig(bool s) {
+    print('come set big is $s');
     isShowPlaying = s;
     update();
   }

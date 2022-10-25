@@ -24,7 +24,7 @@ class HomeController extends GetxController {
       var jsonResult = json.decode(data);
       VideoResult.fromJson(jsonResult);
       final res = VideoResult.fromJson(jsonResult);
-      listVideo = res.data!;
+      listVideo = res.data ?? [];
     } catch (e) {
       print(e);
     }
