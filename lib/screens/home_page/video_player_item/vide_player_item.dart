@@ -32,12 +32,9 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
 
   @override
   void initState() {
-    print('sfdjhajga1');
-
     super.initState();
     vm = Get.put<VideoPlayerItemController>(VideoPlayerItemController(),
         tag: widget.tag.toString());
-    print("video url ${widget.video.videoUrl}");
 
     videoController = VideoPlayerController.asset(widget.video.videoUrl!)
       ..initialize()
@@ -45,10 +42,10 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
         vm.setProcess(videoController.value.position);
         if (vm.total == const Duration(milliseconds: 0)) {
           vm.setTotal(videoController.value.duration);
+          vm.setBuffered(videoController.value.buffered.last.end);
         }
       });
     videoController.setLooping(true);
-    print('sfdjhajga2');
   }
 
   @override
@@ -61,7 +58,7 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
     return GetBuilder<VideoPlayerItemController>(
         tag: widget.tag.toString(),
         builder: (_) {
-          return videoController.value.isPlaying && !_.isShowPlaying
+          return videoController.value.isPlaying
               ? Container()
               : Icon(
                   Icons.play_arrow_rounded,
@@ -203,56 +200,104 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
                                     ),
                               const SizedBox(height: 10),
                               logic.showIndicator
-                                  ? GestureDetector(
-                                      onForcePressStart: (ForcePressDetails f) {
-                                        logic.setBig(true);
-                                      },
-                                      child: Container(
-                                        // color: Colors.red,
-                                        height: 4,
-                                        alignment: Alignment.bottomRight,
-                                        child: ProgressBar(
-                                          progress: logic.process,
-                                          buffered: const Duration(
-                                              milliseconds: 2000),
-                                          total: logic.total,
-                                          onSeek: (process) {
-                                            videoController.seekTo(process);
-                                          },
-                                          onDragUpdate: (details) {
-                                            logic.setProcess(details.timeStamp);
-                                            videoController
-                                                .seekTo(details.timeStamp);
-                                          },
-                                          onDragStart:
-                                              (ThumbDragDetails details) {
+                                  ? (logic.big
+                                      ? GestureDetector(
+                                          onTap: () {
                                             logic.setBig(true);
-                                            logic.setShowInfo(false);
-                                            // logic.setTime(
-                                            //     details.timeStamp.inSeconds);
                                           },
-                                          onDragEnd: () {
-                                            logic.setBig(false);
-                                            logic.setShowInfo(true);
+                                          child: Container(
+                                            alignment: Alignment.bottomLeft,
+                                            child: ProgressBar(
+                                              progress: logic.process,
+                                              buffered: logic.buffered,
+                                              total: logic.total,
+                                              onSeek: (process) {
+                                                videoController.seekTo(process);
+                                              },
+                                              onDragUpdate: (details) {
+                                                logic.setProcess(
+                                                    details.timeStamp);
+                                                videoController
+                                                    .seekTo(details.timeStamp);
+                                              },
+                                              onDragStart:
+                                                  (ThumbDragDetails details) {
+                                                logic.setBig(true);
+                                                logic.setShowInfo(false);
+                                              },
+                                              onDragEnd: () {
+                                                logic.setBig(false);
+                                                logic.setShowInfo(true);
+                                              },
+                                              timeLabelLocation:
+                                                  TimeLabelLocation.none,
+                                              barHeight: 5,
+                                              thumbRadius: 1,
+                                              thumbGlowRadius: 9,
+                                              timeLabelTextStyle: AppTextStyle
+                                                  .textWhiterS16Bold,
+                                              bufferedBarColor: AppColors
+                                                  .whiteAuth
+                                                  .withOpacity(0.5),
+                                              baseBarColor: AppColors.whiteAuth
+                                                  .withOpacity(0.4),
+                                              progressBarColor: AppColors
+                                                  .whiteAuth
+                                                  .withOpacity(0.7),
+                                              thumbColor: AppColors.whiteAuth
+                                                  .withOpacity(1),
+                                            ),
+                                          ),
+                                        )
+                                      : GestureDetector(
+                                          onTap: () {
+                                            logic.setBig(true);
                                           },
-                                          timeLabelLocation:
-                                              TimeLabelLocation.none,
-                                          barHeight: logic.big ? 8 : 1.5,
-                                          thumbRadius: 1,
-                                          thumbGlowRadius: 9,
-                                          timeLabelTextStyle:
-                                              AppTextStyle.textWhiterS16Bold,
-                                          bufferedBarColor: AppColors.whiteAuth
-                                              .withOpacity(0.5),
-                                          baseBarColor: AppColors.whiteAuth
-                                              .withOpacity(0.4),
-                                          progressBarColor: AppColors.whiteAuth
-                                              .withOpacity(0.7),
-                                          thumbColor: AppColors.whiteAuth
-                                              .withOpacity(1),
-                                        ),
-                                      ),
-                                    )
+                                          child: Container(
+                                            // color: Colors.red,
+                                            alignment: Alignment.bottomLeft,
+                                            child: ProgressBar(
+                                              progress: logic.process,
+                                              buffered: logic.buffered,
+                                              total: logic.total,
+                                              onSeek: (process) {
+                                                videoController.seekTo(process);
+                                              },
+                                              onDragUpdate: (details) {
+                                                logic.setProcess(
+                                                    details.timeStamp);
+                                                videoController
+                                                    .seekTo(details.timeStamp);
+                                              },
+                                              onDragStart:
+                                                  (ThumbDragDetails details) {
+                                                logic.setBig(true);
+                                                logic.setShowInfo(false);
+                                              },
+                                              onDragEnd: () {
+                                                logic.setBig(false);
+                                                logic.setShowInfo(true);
+                                              },
+                                              timeLabelLocation:
+                                                  TimeLabelLocation.none,
+                                              barHeight: 1.5,
+                                              thumbRadius: 1,
+                                              thumbGlowRadius: 9,
+                                              timeLabelTextStyle: AppTextStyle
+                                                  .textWhiterS16Bold,
+                                              bufferedBarColor: AppColors
+                                                  .whiteAuth
+                                                  .withOpacity(0.5),
+                                              baseBarColor: AppColors.whiteAuth
+                                                  .withOpacity(0.4),
+                                              progressBarColor: AppColors
+                                                  .whiteAuth
+                                                  .withOpacity(0.7),
+                                              thumbColor: AppColors.whiteAuth
+                                                  .withOpacity(1),
+                                            ),
+                                          ),
+                                        ))
                                   : const SizedBox(),
                             ],
                           ),

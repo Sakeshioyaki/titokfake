@@ -9,7 +9,7 @@ class VideoPlayerItemController extends GetxController {
   bool showInfo = true;
   Duration process = const Duration(milliseconds: 0);
   late Duration total = const Duration(milliseconds: 0);
-  int time = 0;
+  late Duration buffered = const Duration(milliseconds: 0);
 
   setProcess(Duration s) {
     process = s;
@@ -21,9 +21,8 @@ class VideoPlayerItemController extends GetxController {
     update();
   }
 
-  setTime(int s) {
-    print('set time ');
-    time = s;
+  setBuffered(Duration s) {
+    buffered = s;
     update();
   }
 
@@ -39,7 +38,7 @@ class VideoPlayerItemController extends GetxController {
 
   setBig(bool s) {
     print('come set big is $s');
-    isShowPlaying = s;
+    big = s;
     update();
   }
 
