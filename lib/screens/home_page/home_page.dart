@@ -4,8 +4,8 @@ import 'package:tiktok_fake/common/app_colors.dart';
 import 'package:tiktok_fake/common/app_images.dart';
 import 'package:tiktok_fake/common/app_text_styles.dart';
 import 'package:tiktok_fake/screens/home_page/home_controller.dart';
-import 'package:tiktok_fake/screens/home_page/video_player_item/vide_player_item.dart';
-import 'package:tiktok_fake/screens/home_page/widget/indicator_custom.dart';
+import 'package:tiktok_fake/screens/home_page/video_player_item/video_player_item.dart';
+import 'package:tiktok_fake/screens/home_page/widgets/indicator_custom.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -23,7 +23,6 @@ class _HomePageState extends State<HomePage>
     super.initState();
     vm.tabController = TabController(length: 2, vsync: this);
     vm.fetchInitialMovies();
-    print('sfdjhajga');
   }
 
   @override
@@ -52,16 +51,13 @@ class _HomePageState extends State<HomePage>
               physics: const ClampingScrollPhysics(),
               controller: logic.tabController,
               children: [
-                Container(
-                  color: Colors.red,
+                SizedBox(
                   height: Get.height,
                   child: PageView.builder(
                     itemCount: logic.listVideo.length,
                     scrollDirection: Axis.vertical,
                     controller: logic.controller,
                     itemBuilder: (BuildContext context, int index) {
-                      print('lenght : ${logic.listVideo.length}');
-                      print('$index');
                       return RotatedBox(
                         quarterTurns: 1,
                         child: VideoPlayerItem(

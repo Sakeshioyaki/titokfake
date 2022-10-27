@@ -25,6 +25,12 @@ class AppImages {
   static const String icSetting = 'assets/icons/settings.png';
   static const String icPeopleSetting = 'assets/icons/user_profile_icon.png';
   static const String icOutLineHeart = 'assets/icons/outLine_heart.png';
-  static const String icRedHeart = 'assets/icons/redHeart.png';
   static const String icNotLike = 'assets/icons/dont_like.png';
+
+  static const String icRedHeart = 'assets/icons/heartLiked.png';
+  static const String icWhiteHeart = 'assets/icons/heartWhite.png';
+
+  static const String animationHeart = 'assets/json/heart1.json';
+  static const String animationHeart2 = 'assets/json/heart2.json';
+  static const String animationHeart3 = 'assets/icons/ic_heart_animation.json';
 }

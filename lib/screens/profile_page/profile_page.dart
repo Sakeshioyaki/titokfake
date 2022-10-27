@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tiktok_fake/common/app_colors.dart';
 import 'package:tiktok_fake/common/app_images.dart';
 import 'package:tiktok_fake/common/app_text_styles.dart';
-import 'package:tiktok_fake/screens/profile_page/Widget/video_item.dart';
+import 'package:tiktok_fake/screens/profile_page/widgets/video_item.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({

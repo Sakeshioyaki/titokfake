@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:tiktok_fake/common/app_images.dart';
 import 'package:tiktok_fake/common/app_text_styles.dart';
+import 'package:tiktok_fake/screens/home_page/widgets/right_panel_controller.dart';
 
 class RightPanel extends StatelessWidget {
   final String? likes;
@@ -9,6 +12,7 @@ class RightPanel extends StatelessWidget {
   final String? profileImg;
   final String? albumImg;
   final String? bookMark;
+
   const RightPanel({
     Key? key,
     required this.size,
@@ -24,15 +28,46 @@ class RightPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: SizedBox(
-        height: size.height,
+    Get.put<RightPanelController>(RightPanelController());
+    return GetBuilder<RightPanelController>(builder: (logic) {
+      return Container(
+        padding: const EdgeInsets.only(right: 10),
+        width: size.width * 0.20,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
+          children: [
             buildProfile(),
-            const SizedBox(height: 34),
-            buildLikes(),
+            logic.isLike
+                ? Stack(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          logic.setLike();
+                        },
+                        child: Lottie.asset(
+                          AppImages.animationHeart3,
+                          width: 75,
+                          repeat: false,
+                        ),
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        width: 70,
+                        child: Column(
+                          children: [
+                            const SizedBox(
+                              height: 60,
+                            ),
+                            Text(
+                              "  ${likes}" ?? '',
+                              style: AppTextStyle.textWhiteS14,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  )
+                : buildLikes(),
             const SizedBox(height: 23),
             GestureDetector(
                 onTap: () {
@@ -59,8 +94,8 @@ class RightPanel extends StatelessWidget {
             buildMusicAlbum()
           ],
         ),
-      ),
-    );
+      );
+    });
   }
 
   Future<dynamic> buildCommentContent(BuildContext context) {
@@ -323,19 +358,27 @@ class RightPanel extends StatelessWidget {
   }
 
   Widget buildLikes() {
-    return Column(
-      children: [
-        Image.asset(
-          AppImages.icHeart,
-          width: 34,
+    return GetBuilder<RightPanelController>(builder: (logic) {
+      return Container(
+        alignment: Alignment.center,
+        padding: const EdgeInsets.only(top: 22),
+        child: Column(
+          children: [
+            GestureDetector(
+              onTap: () {
+                logic.setLike();
+              },
+              child: const Icon(Icons.favorite, size: 29, color: Colors.white),
+            ),
+            const SizedBox(height: 9),
+            Text(
+              likes ?? '',
+              style: AppTextStyle.textWhiteS14,
+            ),
+          ],
         ),
-        const SizedBox(height: 6),
-        Text(
-          likes!,
-          style: AppTextStyle.textWhiteS14,
-        ),
-      ],
-    );
+      );
+    });
   }
 
   Widget buildProfile() {
