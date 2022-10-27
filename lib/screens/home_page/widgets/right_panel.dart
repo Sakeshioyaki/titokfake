@@ -59,7 +59,7 @@ class RightPanel extends StatelessWidget {
                               height: 60,
                             ),
                             Text(
-                              "  ${likes}" ?? '',
+                              "${likes}" ?? '',
                               style: AppTextStyle.textWhiteS14,
                             ),
                           ],
