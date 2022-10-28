@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:tiktok_fake/common/app_images.dart';
 import 'package:tiktok_fake/common/app_text_styles.dart';
-import 'package:tiktok_fake/screens/home_page/widgets/right_panel_controller.dart';
+import 'package:tiktok_fake/screens/home_page/widgets/right_panel_vm.dart';
 
 class RightPanel extends StatelessWidget {
   final String? likes;
@@ -28,8 +28,8 @@ class RightPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put<RightPanelController>(RightPanelController());
-    return GetBuilder<RightPanelController>(builder: (logic) {
+    Get.put<RightPanelVM>(RightPanelVM());
+    return GetBuilder<RightPanelVM>(builder: (logic) {
       return Container(
         padding: const EdgeInsets.only(right: 10),
         width: size.width * 0.20,
@@ -59,7 +59,7 @@ class RightPanel extends StatelessWidget {
                               height: 60,
                             ),
                             Text(
-                              "${likes}" ?? '',
+                              "$likes" ?? '',
                               style: AppTextStyle.textWhiteS14,
                             ),
                           ],
@@ -358,7 +358,7 @@ class RightPanel extends StatelessWidget {
   }
 
   Widget buildLikes() {
-    return GetBuilder<RightPanelController>(builder: (logic) {
+    return GetBuilder<RightPanelVM>(builder: (logic) {
       return Container(
         alignment: Alignment.center,
         padding: const EdgeInsets.only(top: 22),

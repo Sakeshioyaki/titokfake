@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class RightPanelController extends GetxController {
+class RightPanelVM extends GetxController {
   bool isLike = false;
 
   void setLike() {

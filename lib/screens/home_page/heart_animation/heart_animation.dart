@@ -80,7 +80,7 @@ class _HeartAnimationState extends State<HeartAnimation>
       ),
       body: SafeArea(
         child: Container(
-          child: Lottie.asset(AppImages.animationHeart),
+          child: Lottie.asset(AppImages.animationHeart, repeat: false),
         ),
       ),
     );

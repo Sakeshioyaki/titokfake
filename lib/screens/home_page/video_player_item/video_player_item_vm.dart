@@ -37,7 +37,6 @@ class VideoPlayerItemController extends GetxController {
   }
 
   setBig(bool s) {
-    print('come set big is $s');
     big = s;
     update();
   }

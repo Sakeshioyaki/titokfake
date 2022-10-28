@@ -249,20 +249,23 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
                                         progress: logic.process,
                                         buffered: logic.buffered,
                                         total: logic.total,
-                                        onSeek: (process) {
-                                          videoController.seekTo(process);
+                                        onSeek: (_) {
+                                          videoController.seekTo(_);
                                         },
                                         onDragUpdate: (details) {
                                           logic.setProcess(details.timeStamp);
                                           videoController
                                               .seekTo(details.timeStamp);
+                                          print('come upda6e');
                                         },
                                         onDragStart:
                                             (ThumbDragDetails details) {
+                                          print('dddd');
                                           logic.setBig(true);
                                           logic.setShowInfo(false);
                                         },
                                         onDragEnd: () {
+                                          print('go end');
                                           logic.setBig(false);
                                           logic.setShowInfo(true);
                                         },

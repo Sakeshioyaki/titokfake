@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:tiktok_fake/common/app_images.dart';
 import 'package:tiktok_fake/common/app_text_styles.dart';
+import 'package:tiktok_fake/screens/discovery_page/discovery_page.dart';
 import 'package:tiktok_fake/screens/home_page/heart_animation/heart_animation.dart';
 import 'package:tiktok_fake/screens/home_page/home_page.dart';
 import 'package:tiktok_fake/screens/profile_page/profile_page.dart';
@@ -45,10 +46,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<Widget> _buildScreens() => [
         const HomePage(),
+        const DiscoveryPage(),
         const HeartAnimation(),
-        const Center(
-          child: Text('screen new'),
-        ),
         const Center(
           child: Text('screen new'),
         ),
