@@ -20,7 +20,7 @@ class LeftPanel extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
+      children: [
         Text(
           name ?? '',
           style: const TextStyle(

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:tiktok_fake/common/app_colors.dart';
 import 'package:tiktok_fake/common/app_images.dart';
 import 'package:tiktok_fake/common/app_text_styles.dart';
-import 'package:tiktok_fake/screens/home_page/widgets/right_panel_vm.dart';
+import 'package:tiktok_fake/screens/home_page/video_player_item/video_player_item_vm.dart';
+import 'package:tiktok_fake/screens/home_page/video_player_item/widgets/right_panel_vm.dart';
 
 class RightPanel extends StatelessWidget {
   final String? likes;
@@ -12,6 +14,10 @@ class RightPanel extends StatelessWidget {
   final String? profileImg;
   final String? albumImg;
   final String? bookMark;
+  // final bool? liked;
+  final String tag;
+
+  final bool liked;
 
   const RightPanel({
     Key? key,
@@ -22,80 +28,92 @@ class RightPanel extends StatelessWidget {
     this.profileImg,
     this.albumImg,
     this.bookMark,
+    required this.tag,
+    required this.liked,
   }) : super(key: key);
 
   final Size size;
 
   @override
   Widget build(BuildContext context) {
-    Get.put<RightPanelVM>(RightPanelVM());
-    return GetBuilder<RightPanelVM>(builder: (logic) {
-      return Container(
-        padding: const EdgeInsets.only(right: 10),
-        width: size.width * 0.20,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            buildProfile(),
-            logic.isLike
-                ? Stack(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          logic.setLike();
-                        },
-                        child: Lottie.asset(
-                          AppImages.animationHeart3,
-                          width: 75,
-                          repeat: false,
-                        ),
-                      ),
-                      Container(
-                        alignment: Alignment.center,
-                        width: 70,
-                        child: Column(
-                          children: [
-                            const SizedBox(
-                              height: 60,
-                            ),
-                            Text(
-                              "$likes" ?? '',
-                              style: AppTextStyle.textWhiteS14,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  )
-                : buildLikes(),
-            const SizedBox(height: 23),
-            GestureDetector(
-                onTap: () {
-                  buildCommentContent(context);
-                },
-                child: buildComments()),
-            const SizedBox(height: 23),
-            Column(
+    Get.put<RightPanelVM>(
+      RightPanelVM(),
+      tag: tag,
+    );
+    VideoPlayerItemController videoPlayerItemController =
+        Get.find<VideoPlayerItemController>(
+      tag: tag,
+    );
+    return GetBuilder<RightPanelVM>(
+        tag: tag,
+        builder: (logic) {
+          return Container(
+            padding: const EdgeInsets.only(right: 10),
+            width: size.width * 0.20,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Image.asset(
-                  AppImages.icBookMark,
-                  width: 34,
+                buildProfile(),
+                logic.isLikeAction
+                    ? Stack(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              // logic.setLikeAction();
+                              videoPlayerItemController.setLiked();
+                            },
+                            child: Lottie.asset(
+                              AppImages.animationHeart3,
+                              width: 75,
+                              repeat: false,
+                            ),
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            width: 70,
+                            child: Column(
+                              children: [
+                                const SizedBox(
+                                  height: 60,
+                                ),
+                                Text(
+                                  "$likes",
+                                  style: AppTextStyle.textWhiteS14,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      )
+                    : buildLikes(),
+                const SizedBox(height: 23),
+                GestureDetector(
+                    onTap: () {
+                      buildCommentContent(context);
+                    },
+                    child: buildComments()),
+                const SizedBox(height: 23),
+                Column(
+                  children: [
+                    Image.asset(
+                      AppImages.icBookMark,
+                      width: 34,
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      bookMark ?? '',
+                      style: AppTextStyle.textWhiteS14,
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 6),
-                Text(
-                  bookMark!,
-                  style: AppTextStyle.textWhiteS14,
-                ),
+                const SizedBox(height: 23),
+                buildShare(),
+                const SizedBox(height: 30),
+                buildMusicAlbum()
               ],
             ),
-            const SizedBox(height: 23),
-            buildShare(),
-            const SizedBox(height: 30),
-            buildMusicAlbum()
-          ],
-        ),
-      );
-    });
+          );
+        });
   }
 
   Future<dynamic> buildCommentContent(BuildContext context) {
@@ -120,7 +138,7 @@ class RightPanel extends StatelessWidget {
                 children: [
                   const SizedBox(width: 10),
                   Text(
-                    "${comments!} bình luận",
+                    "${comments ?? ''} bình luận",
                     style: AppTextStyle.textBlackS14Bold,
                   ),
                   GestureDetector(
@@ -314,7 +332,7 @@ class RightPanel extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(14),
             child: Image.network(
-              albumImg!,
+              albumImg ?? '',
               height: 28,
               width: 28,
               fit: BoxFit.cover,
@@ -334,7 +352,7 @@ class RightPanel extends StatelessWidget {
         ),
         const SizedBox(height: 6),
         Text(
-          comments!,
+          comments ?? '',
           style: AppTextStyle.textWhiteS14,
         ),
       ],
@@ -350,7 +368,7 @@ class RightPanel extends StatelessWidget {
         ),
         const SizedBox(height: 6),
         Text(
-          shares!,
+          shares ?? '',
           style: AppTextStyle.textWhiteS14,
         ),
       ],
@@ -358,27 +376,57 @@ class RightPanel extends StatelessWidget {
   }
 
   Widget buildLikes() {
-    return GetBuilder<RightPanelVM>(builder: (logic) {
-      return Container(
-        alignment: Alignment.center,
-        padding: const EdgeInsets.only(top: 22),
-        child: Column(
-          children: [
-            GestureDetector(
-              onTap: () {
-                logic.setLike();
-              },
-              child: const Icon(Icons.favorite, size: 29, color: Colors.white),
-            ),
-            const SizedBox(height: 9),
-            Text(
-              likes ?? '',
-              style: AppTextStyle.textWhiteS14,
-            ),
-          ],
-        ),
-      );
-    });
+    VideoPlayerItemController videoPlayerItemController =
+        Get.find<VideoPlayerItemController>(
+      tag: tag,
+    );
+    return GetBuilder<RightPanelVM>(
+        tag: tag,
+        builder: (logic) {
+          return liked
+              ? Container(
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.only(top: 22),
+                  child: Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          logic.setLikeAction();
+                          videoPlayerItemController.setLiked();
+                        },
+                        child: const Icon(Icons.favorite,
+                            size: 29, color: AppColors.redAccent),
+                      ),
+                      const SizedBox(height: 9),
+                      Text(
+                        likes ?? '',
+                        style: AppTextStyle.textWhiteS14,
+                      ),
+                    ],
+                  ),
+                )
+              : Container(
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.only(top: 22),
+                  child: Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          logic.setLikeAction();
+                          videoPlayerItemController.setLiked();
+                        },
+                        child: const Icon(Icons.favorite,
+                            size: 29, color: Colors.white),
+                      ),
+                      const SizedBox(height: 9),
+                      Text(
+                        likes ?? '',
+                        style: AppTextStyle.textWhiteS14,
+                      ),
+                    ],
+                  ),
+                );
+        });
   }
 
   Widget buildProfile() {
@@ -388,7 +436,7 @@ class RightPanel extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(24),
         child: Image.network(
-          profileImg!,
+          profileImg ?? '',
           // fit: BoxFit.contain,
         ),
       ),

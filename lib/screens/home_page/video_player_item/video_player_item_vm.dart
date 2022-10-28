@@ -5,53 +5,62 @@ class VideoPlayerItemController extends GetxController {
   double opacity = 0.4;
   bool showIndicator = false;
   bool big = false;
+  bool liked = false;
   bool showTime = false;
   bool showInfo = true;
   Duration process = const Duration(milliseconds: 0);
   late Duration total = const Duration(milliseconds: 0);
   late Duration buffered = const Duration(milliseconds: 0);
 
-  setProcess(Duration s) {
+  void setLiked() {
+    print('come');
+    liked = liked ? false : true;
+    update();
+  }
+
+  void setProcess(Duration s) {
+    print('sett process');
     process = s;
     update();
   }
 
-  setTotal(Duration s) {
+  void setTotal(Duration s) {
+    print('set total');
     total = s;
     update();
   }
 
-  setBuffered(Duration s) {
+  void setBuffered(Duration s) {
     buffered = s;
     update();
   }
 
-  setIsShowPlaying(bool s) {
+  void setIsShowPlaying(bool s) {
     isShowPlaying = s;
     update();
   }
 
-  setOpacity(double opa) {
+  void setOpacity(double opa) {
     opacity = opa;
     update();
   }
 
-  setBig(bool s) {
+  void setBig(bool s) {
     big = s;
     update();
   }
 
-  setShowTime(bool s) {
+  void setShowTime(bool s) {
     showTime = s;
     update();
   }
 
-  setShowInfo(bool s) {
+  void setShowInfo(bool s) {
     showInfo = s;
     update();
   }
 
-  setShowIndicator(bool s) {
+  void setShowIndicator(bool s) {
     showIndicator = s;
     update();
   }

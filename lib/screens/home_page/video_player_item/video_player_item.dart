@@ -5,8 +5,8 @@ import 'package:tiktok_fake/common/app_colors.dart';
 import 'package:tiktok_fake/common/app_text_styles.dart';
 import 'package:tiktok_fake/model/video_model.dart';
 import 'package:tiktok_fake/screens/home_page/video_player_item/video_player_item_vm.dart';
-import 'package:tiktok_fake/screens/home_page/widgets/left_panel.dart';
-import 'package:tiktok_fake/screens/home_page/widgets/right_panel.dart';
+import 'package:tiktok_fake/screens/home_page/video_player_item/widgets/left_panel.dart';
+import 'package:tiktok_fake/screens/home_page/video_player_item/widgets/right_panel.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -40,7 +40,7 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
       ..initialize()
       ..addListener(() {
         vm.setProcess(videoController.value.position);
-        if (vm.total == const Duration(milliseconds: 100)) {
+        if (vm.total == const Duration(milliseconds: 0)) {
           vm.setTotal(videoController.value.duration);
           vm.setBuffered(videoController.value.buffered.last.end);
         }
@@ -148,6 +148,9 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
                                             "${widget.video.profileImg}",
                                         albumImg: "${widget.video.albumImg}",
                                         bookMark: "${widget.video.bookMark}",
+                                        tag: "${widget.tag}",
+                                        liked: logic.liked,
+                                        // tagIndex: widget.tag,
                                       ),
                                     ],
                                   )
@@ -156,41 +159,46 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
                         ),
                         logic.showInfo
                             ? const SizedBox()
-                            : Container(
-                                padding: const EdgeInsets.only(bottom: 30),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Row(
+                            : GetBuilder<VideoPlayerItemController>(
+                                tag: widget.tag.toString(),
+                                builder: (_) {
+                                  return Container(
+                                    padding: const EdgeInsets.only(bottom: 30),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
-                                        Text(
-                                          '${logic.process.inMinutes}:${logic.process.inSeconds}',
-                                          style:
-                                              AppTextStyle.textWhite.copyWith(
-                                            fontSize: 24,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        Text(
-                                          '  /  ',
-                                          style: AppTextStyle.textWhiterS16,
-                                        ),
-                                        Text(
-                                          '${logic.total.inMinutes}:${logic.total.inSeconds}',
-                                          style:
-                                              AppTextStyle.textWhite.copyWith(
-                                            fontSize: 24,
-                                            color:
-                                                Colors.white.withOpacity(0.5),
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              '${_.process.inMinutes}:${_.process.inSeconds}',
+                                              style: AppTextStyle.textWhite
+                                                  .copyWith(
+                                                fontSize: 24,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            Text(
+                                              '  /  ',
+                                              style: AppTextStyle.textWhiterS16,
+                                            ),
+                                            Text(
+                                              '${logic.total.inMinutes}:${logic.total.inSeconds}',
+                                              style: AppTextStyle.textWhite
+                                                  .copyWith(
+                                                fontSize: 24,
+                                                color: Colors.white
+                                                    .withOpacity(0.5),
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ],
+                                        )
                                       ],
-                                    )
-                                  ],
-                                ),
-                              ),
+                                    ),
+                                  );
+                                }),
                         const SizedBox(height: 10),
                         logic.showIndicator
                             ? (logic.big
@@ -256,7 +264,7 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
                                           logic.setProcess(details.timeStamp);
                                           videoController
                                               .seekTo(details.timeStamp);
-                                          print('come upda6e');
+                                          print('come update');
                                         },
                                         onDragStart:
                                             (ThumbDragDetails details) {
