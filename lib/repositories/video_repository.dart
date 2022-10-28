@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
-import 'package:tiktok_fake/model/video_results.dart';
+import 'package:tiktok_fake/model/video_model/video_results.dart';
 
 class VideoRepository {
   Future<VideoResult> getVideos() async {

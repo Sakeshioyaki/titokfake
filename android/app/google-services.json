@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "266418367567",
+    "project_id": "titokfake-28cef",
+    "storage_bucket": "titokfake-28cef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:266418367567:android:20bd8ceb3a8d0e28c80e3a",
+        "android_client_info": {
+          "package_name": "com.example.tiktok_fake"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "266418367567-v477sfv1ek3catm6ep43fskca0mi6ojj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxa4mmvWMVqxFAesZVV9XkSefqHEF3qeM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "266418367567-v477sfv1ek3catm6ep43fskca0mi6ojj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -11,21 +11,25 @@ class VideoPlayerItemController extends GetxController {
   Duration process = const Duration(milliseconds: 0);
   late Duration total = const Duration(milliseconds: 0);
   late Duration buffered = const Duration(milliseconds: 0);
+  bool isLikeAction = false;
 
-  void setLiked() {
-    print('come');
-    liked = liked ? false : true;
+  void setLikeAction(bool s) {
+    print('update');
+    isLikeAction = s;
+    update();
+  }
+
+  void setLiked(bool s) {
+    liked = s;
     update();
   }
 
   void setProcess(Duration s) {
-    print('sett process');
     process = s;
     update();
   }
 
   void setTotal(Duration s) {
-    print('set total');
     total = s;
     update();
   }

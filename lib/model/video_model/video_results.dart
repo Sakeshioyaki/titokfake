@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:tiktok_fake/model/video_model.dart';
+import 'package:tiktok_fake/model/video_model/video_model.dart';
 
 part 'video_results.g.dart';
 

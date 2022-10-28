@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tiktok_fake/common/app_colors.dart';
 import 'package:tiktok_fake/common/app_text_styles.dart';
-import 'package:tiktok_fake/model/video_model.dart';
+import 'package:tiktok_fake/model/video_model/video_model.dart';
 import 'package:tiktok_fake/screens/home_page/video_player_item/video_player_item_vm.dart';
 import 'package:tiktok_fake/screens/home_page/video_player_item/widgets/left_panel.dart';
 import 'package:tiktok_fake/screens/home_page/video_player_item/widgets/right_panel.dart';
@@ -149,7 +149,6 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
                                         albumImg: "${widget.video.albumImg}",
                                         bookMark: "${widget.video.bookMark}",
                                         tag: "${widget.tag}",
-                                        liked: logic.liked,
                                         // tagIndex: widget.tag,
                                       ),
                                     ],

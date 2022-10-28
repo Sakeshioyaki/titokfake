@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:tiktok_fake/enum/load_status.dart';
-import 'package:tiktok_fake/model/video_model.dart';
-import 'package:tiktok_fake/model/video_results.dart';
+import 'package:tiktok_fake/model/video_model/video_model.dart';
+import 'package:tiktok_fake/model/video_model/video_results.dart';
 import 'package:tiktok_fake/repositories/video_repository.dart';
 
 class HomeController extends GetxController {
