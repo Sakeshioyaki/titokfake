@@ -22,7 +22,6 @@ class _HomePageState extends State<HomePage>
   initState() {
     super.initState();
     vm.tabController = TabController(length: 2, vsync: this);
-    vm.fetchInitialMovies();
   }
 
   @override

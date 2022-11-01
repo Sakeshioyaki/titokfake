@@ -37,7 +37,7 @@ class Database {
     }
   }
 
-  Future<void> addNote(String content, String uid, String title,
+  Future<void> addVideo(String content, String uid, String title,
       Timestamp dateCreated, String imgUrl) async {
     try {
       await _firestore.collection("users").doc(uid).collection("notes").add({

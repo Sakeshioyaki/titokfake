@@ -29,9 +29,12 @@ class AppImages {
 
   static const String icRedHeart = 'assets/icons/heartLiked.png';
   static const String icWhiteHeart = 'assets/icons/heartWhite.png';
+  static const String icTiktok = 'assets/imgs/ic_tiktok.png';
 
   static const String heartIc = 'assets/icons/heartRed.png';
   static const String animationHeart = 'assets/json/heart1.json';
   static const String animationHeart2 = 'assets/json/heart2.json';
   static const String animationHeart3 = 'assets/icons/ic_heart_animation.json';
+  static const String icGoogle = 'assets/imgs/google.png';
+  static const String icFacebook = 'assets/imgs/facebook.png';
 }

@@ -57,11 +57,19 @@ class AppTextStyle {
     fontSize: 16,
     fontWeight: FontWeight.bold,
   );
+  static final textBlackS20Bold = textBlack.copyWith(
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+  );
   static final textWhiterS16 = textWhite.copyWith(
     fontSize: 16,
   );
   static final textWhiterS16Bold = textWhite.copyWith(
     fontSize: 16,
+    fontWeight: FontWeight.bold,
+  );
+  static final textWhiterS46Bold = textWhite.copyWith(
+    fontSize: 46,
     fontWeight: FontWeight.bold,
   );
 }
